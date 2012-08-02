@@ -32,9 +32,6 @@ jQuery().ready(function() {
       container: containerDiv,
       basePath: '/extensions/epiceditor/assets/epiceditor',
       clientSideStorage: false,
-      file: {
-        autoSave: false
-      },
       theme: {
         editor: '/../epiceditor.symphony.editor.css'
       }
