@@ -1,4 +1,4 @@
-jQuery().ready(function() {
+jQuery('#contents').ready(function() {
 
   jQuery.expr[':'].regex = function(elem, index, match) {
       var matchParams = match[3].split(','),
@@ -13,23 +13,22 @@ jQuery().ready(function() {
       return regex.test(jQuery(elem)[attr.method](attr.property));
   }
 
-  var needsEditor = false;
+  var editorCount = 1;
 
-  jQuery('textarea').filter(function() {
-    return this.className.match(/[^\s]+markdown[^\s]+/);
+  jQuery('#contents textarea').filter(function() {
+    return this.className.match(/markdown/);
   }).each(function() {
     // Get the height of the element
     $element = jQuery(this);
 
     var elementHeight = $element.height();
-    var containerDiv = document.createElement('div');
-    jQuery(containerDiv).addClass('epiceditor').height(elementHeight);
-
-    $element.before(containerDiv);
+    var elementIdentifier = 'symphonyepiceditor' + editorCount;
+    var containerDiv = jQuery('<div id="' + elementIdentifier + '" class="symphonyepiceditor" style="height:' + elementHeight +'px;"/>');
+    $element.after(containerDiv);
     $element.hide();
 
     var newEditor = new EpicEditor({
-      container: containerDiv,
+      container: elementIdentifier,
       basePath: '/extensions/epiceditor/assets/epiceditor',
       clientSideStorage: false,
       theme: {
@@ -37,19 +36,15 @@ jQuery().ready(function() {
       }
     });
 
-
     newEditor.load();
 
-        newEditor.importFile('contents', $element.val());
-    // When it loads put the existing content in there
-    newEditor.on('load', function (file) {
-      $element.val(file.content);
-    });
+    newEditor.importFile('symphony.epiceditor.contents', $element.val());
 
     //Everytime it's updated, update the textarea
     newEditor.on('update', function (file) {
       $element.val(file.content);
     });
 
+    editorCount++;
   });
 });
