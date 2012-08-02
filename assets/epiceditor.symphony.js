@@ -23,7 +23,7 @@ jQuery().ready(function() {
 
     var elementHeight = $element.height();
     var containerDiv = document.createElement('div');
-    jQuery(containerDiv).height(elementHeight);
+    jQuery(containerDiv).addClass('epiceditor').height(elementHeight);
 
     $element.before(containerDiv);
     $element.hide();
@@ -36,7 +36,7 @@ jQuery().ready(function() {
         autoSave: false
       },
       theme: {
-        editor: '/themes/editor/epic-light.css'
+        editor: '/../epiceditor.symphony.editor.css'
       }
     });
 
