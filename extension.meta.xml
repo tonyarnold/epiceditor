@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension id="epiceditor" status="experimental" xmlns="http://symphony-cms.com/schemas/extension/1.0">
+	<name>EpicEditor</name>
+	<description>Adds EpicEditor to any markdown textarea in the admin interface</description>
+	<repo type="github">https://github.com/tonyarnold/epiceditor</repo>
+	<types>
+		<type>Interface</type>
+	</types>
+	<authors>
+		<author>
+			<name github="tonyarnold" symphony="tonyarnold">Tony Arnold</name>
+			<website>http://thecocoabots.com/</website>
+		</author>
+	</authors>
+	<releases>
+		<release version="0.1" date="2012-08-02" min="2.3.x" />
+	</releases>
+</extension>
