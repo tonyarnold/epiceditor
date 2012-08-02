@@ -37,8 +37,8 @@
 			// only proceed on New or Edit publish pages
 			if ($page instanceof contentPublish and in_array($context['page'], array('new', 'edit'))) {
 				$page->addStylesheetToHead(URL . '/extensions/epiceditor/assets/epiceditor.symphony.css', 'screen', 10);
-	            $page->addScriptToHead(URL . '/extensions/epiceditor/assets/epiceditor/js/epiceditor.js', 9001);
-				$page->addScriptToHead(URL . '/extensions/epiceditor/assets/epiceditor.symphony.js', 9002);
+	            $page->addScriptToHead(URL . '/extensions/epiceditor/assets/epiceditor/js/epiceditor.js', 19001);
+				$page->addScriptToHead(URL . '/extensions/epiceditor/assets/epiceditor.symphony.js', 19002);
 			}
 		}
 	}
