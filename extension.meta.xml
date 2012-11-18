@@ -2,7 +2,7 @@
 <extension id="epiceditor" status="experimental" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	<name>EpicEditor</name>
 	<description>Adds EpicEditor to any markdown textarea in the admin interface</description>
-	<repo type="github">https://github.com/tonyarnold/EpicEditor</repo>
+	<repo type="github">https://github.com/tonyarnold/epiceditor</repo>
 	<types>
 		<type>Interface</type>
 	</types>
