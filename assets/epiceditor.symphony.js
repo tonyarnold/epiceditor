@@ -1,50 +1,83 @@
-jQuery('#contents').ready(function() {
+/*global EpicEditor marked */
 
-  jQuery.expr[':'].regex = function(elem, index, match) {
-      var matchParams = match[3].split(','),
-          validLabels = /^(data|css):/,
-          attr = {
-              method: matchParams[0].match(validLabels) ?
-                          matchParams[0].split(':')[0] : 'attr',
-              property: matchParams.shift().replace(validLabels,'')
-          },
-          regexFlags = 'ig',
-          regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g,''), regexFlags);
-      return regex.test(jQuery(elem)[attr.method](attr.property));
-  }
+jQuery(document).on('ready', function () {
+  var $ = jQuery;
+  var editors = [];
+  var fields = $('.field').filter(function (i, el) {
+    return $(el).find('textarea').hasClass('markdown');
+  });
 
-  var editorCount = 1;
+  fields.each(function (i, el) {
+    el = $(el);
+    var container = $('<div>');
+    var textarea = el.find('textarea.markdown');
 
-  jQuery('#contents textarea').filter(function() {
-    return this.className.match(/markdown/);
-  }).each(function() {
-    // Get the height of the element
-    $element = jQuery(this);
+    el.addClass('field-epiceditor');
+    container.addClass('epiceditor-instance');
+    container.css({
+        height: textarea.height()+20
+    });
+    textarea.css({display:'none'});
 
-    var elementHeight = $element.height();
-    var elementIdentifier = 'symphonyepiceditor' + editorCount;
-    var containerDiv = jQuery('<div id="' + elementIdentifier + '" class="symphonyepiceditor" style="height:' + elementHeight +'px;"/>');
-    $element.after(containerDiv);
-    $element.hide();
+    el.append(container);
 
-    var newEditor = new EpicEditor({
-      container: elementIdentifier,
-      basePath: '/extensions/epiceditor/assets/epiceditor',
-      clientSideStorage: false,
-      theme: {
-        editor: '/../epiceditor.symphony.editor.css'
-      }
+    var editor = new EpicEditor({
+        container: container[0]
+      , basePath: '/extensions/epiceditor/assets/epiceditor'
+      , clientSideStorage: false
+      , localStorageName: 'epiceditor'
+      , parser: marked
+      , file: {
+            name: 'epiceditor'
+          , defaultContent: ''
+          , autoSave: 100
+        }
+      , theme: {
+            base:     '/../epiceditor.symphony.base.css'
+          , preview:  '/../epiceditor.symphony.preview.css'
+          , editor:   '/../epiceditor.symphony.editor.css'
+        }
+      , focusOnLoad: false
+      , shortcut: {
+            modifier: 18
+          , fullscreen: 70
+          , preview: 80
+          , edit: 79
+        }
     });
 
-    newEditor.load();
 
-    newEditor.importFile('symphony.epiceditor.contents', $element.val());
+    editor.on('load', function () {
+      var preview = $(editor.previewerIframeDocument.body);
+      var editord = $(editor.editorIframeDocument.body);
+      preview.on('click', function (e) {
+        editor.edit();
+      });
 
-    //Everytime it's updated, update the textarea
-    newEditor.on('update', function (file) {
-      $element.val(file.content);
+      editor.on('fullscreenenter', function () {
+        preview.off('click');
+      });
+
+      editor.on('fullscreenexit', function () {
+        preview.on('click', function (e) {
+          editor.edit();
+        });
+      });
+    });
+    
+
+    editor.on('update', function () {
+      textarea.val(editor.exportFile());
     });
 
-    editorCount++;
+    editor.load();
+    editor.importFile('symphony.epiceditor.contents', textarea.val());
+
+    editors.push({
+        el: el
+      , textarea: textarea
+      , editor: editor
+    });    
   });
 });
+
