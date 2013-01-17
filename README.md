@@ -9,4 +9,4 @@ About
 Adding the extension to Symphony CMS will replace all Markdown text fields in the backend with an [EpicEditor][ee] instance.
 
 
-ee: http://oscargodson.github.com/EpicEditor/
+[ee]: http://oscargodson.github.com/EpicEditor/
