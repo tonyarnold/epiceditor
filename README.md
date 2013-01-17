@@ -1,4 +1,4 @@
-Symphony-CMS---EpicEditor
+Symphony CMS - EpicEditor
 =========================
 
 EpicEditor extension for Symphony CMS.
