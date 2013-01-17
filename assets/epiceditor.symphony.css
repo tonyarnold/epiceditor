@@ -1,15 +1,25 @@
-.symphonyepiceditor {
-	padding: 2px 3px;
-	border: 1px solid rgba(0, 0, 0, 0.25);
-	-webkit-box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.05);
-	box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.05);
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-border-radius: 2px;
-	border-radius: 2px;
+.epiceditor-instance {
+	margin:0;
 	margin-top: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.05);
+  	 -moz-box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.05);
+	        box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.05);
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+	-webkit-border-radius: 2px;
+	   -moz-border-radius: 2px;
+	        border-radius: 2px;
 	width: 100%;
-	font-size: 109.09%;
-	font-family: inherit;
+	font-size: 12px;
+	font-family: 'Lucida Grande', Leelawadee, Tahoma, Verdana, sans-serif;
+}
+
+.epiceditor-instance.focus {
+	outline: none;
+	border-color: rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+	   -moz-box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+	        box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
 }
